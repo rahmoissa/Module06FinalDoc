@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahmo’s Favorites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f7f7f7;
+        }
+        header, footer {
+            background: #4C7A34;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        #logo {
+            width: 120px;
+            height: 120px;
+            background: #D99A25;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .panel {
+            width: 230px;
+            background: #ffffff;
+            border-right: 1px solid #ddd;
+            padding: 15px;
+        }
+        .panel h3 { margin-top: 0; }
+        .panel a {
+            display: block;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #4C7A34;
+            font-weight: bold;
+        }
+        .panel a:hover { text-decoration: underline; }
+        .content { flex: 1; padding: 20px 30px 60px; }
+        .grid-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        .grid-section h2 { margin-top: 0; }
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+        .grid-card {
+            background: #f1f8f1;
+            border: 1px solid #dce8dc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: left;
+        }
+        .grid-card h4 {
+            margin-top: 0;
+            color: #4C7A34;
+        }
+        .form-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #4C7A34;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        button:hover { background: #3b6128; }
+        #savedList {
+            margin-top: 15px;
+            background: #eef7ed;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        #savedList ul { padding-left: 20px; text-align: left; }
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+            .favorites-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div id="logo">LOGO</div>
+    <h1>Rahmo’s Favorites</h1>
+    <p>A simple web app that shows my favorite restaurants, movies, and lets you save your own.</p>
+</header>
+
+<div class="layout">
+    <aside class="panel">
+        <h3>Navigation</h3>
+        <a href="#home">Home</a>
+        <a href="#grid">Favorites Grid</a>
+        <a href="#form">Add a Favorite</a>
+        <a href="#list">Stored Favorites</a>
+        <hr>
+        <p><strong>Tip:</strong> Items you add are saved in your browser using Web Storage.</p>
+    </aside>
+
+    <div class="content">
+        <section id="home" class="grid-section">
+            <h2>Home</h2>
+            <p>This page includes a navigation panel, a 3-column favorites grid, and Web Storage to save and display favorite items.</p>
+        </section>
+
+        <section id="grid" class="grid-section">
+            <h2>Favorites Grid</h2>
+            <p>This grid displays some of my favorite things in 3 columns (restaurants, movies, and cooking).</p>
+            <div class="favorites-grid">
+                <div class="grid-card">
+                    <h4>🍽️ Favorite Restaurants</h4>
+                    <p>Crave</p>
+                    <p>Iconos</p>
+                    <p>Quruxlow</p>
+                </div>
+                <div class="grid-card">
+                    <h4>🎬 Favorite Horror Movies</h4>
+                    <p>SCREAM (1996)</p>
+                    <p>Halloween (1978)</p>
+                    <p>The Conjuring</p>
+                </div>
+                <div class="grid-card">
+                    <h4>👩🏽‍🍳 Cooking</h4>
+                    <p>I love feeding people and watching the satisfaction on their faces.</p>
+                    <p>Somali pasta, rice, and stews.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="form" class="form-section">
+            <h2>Add Your Favorite Item</h2>
+            <p>Enter a favorite item below. It will be saved to Web Storage and shown in the list.</p>
+
+            <label for="favType">Type of Favorite:</label>
+            <select id="favType">
+                <option value="Restaurant">Restaurant</option>
+                <option value="Movie">Movie</option>
+                <option value="Recipe">Recipe</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="favName">Favorite Name:</label>
+            <input type="text" id="favName" placeholder="e.g. Quruxlow, SCREAM, Suugo">
+
+            <label for="favNotes">Notes (optional):</label>
+            <textarea id="favNotes" rows="3" placeholder="Why do you like this?"></textarea>
+
+            <button id="saveBtn">Save Favorite</button>
+        </section>
+
+        <section id="list" class="grid-section">
+            <h2>Saved Favorites (from Web Storage)</h2>
+            <p>These items are being read from <code>localStorage</code>. They will stay here until cleared from your browser.</p>
+            <div id="savedList">
+                <ul id="favList"></ul>
+            </div>
+        </section>
+    </div>
+</div>
+
+<footer>
+    © 2025 Rahmo — Web Development Project (Rasmussen University) — Favorites Website
+</footer>
+
+<script>
+    const saveBtn = document.getElementById('saveBtn');
+    const favList = document.getElementById('favList');
+
+    document.addEventListener('DOMContentLoaded', loadFavorites);
+
+    saveBtn.addEventListener('click', function() {
+        const type = document.getElementById('favType').value;
+        const name = document.getElementById('favName').value.trim();
+        const notes = document.getElementById('favNotes').value.trim();
+
+        if (name === "") {
+            alert("Please enter a favorite name.");
+            return;
+        }
+
+        const newFav = { type, name, notes };
+        let favArray = JSON.parse(localStorage.getItem('rahmoFavoriteList')) || [];
+        favArray.push(newFav);
+        localStorage.setItem('rahmoFavoriteList', JSON.stringify(favArray));
+        renderFavorites(favArray);
+
+        document.getElementById('favName').value = "";
+        document.getElementById('favNotes').value = "";
+        alert("Favorite saved to Web Storage!");
+    });
+
+    function loadFavorites() {
+        const favArray = JSON.parse(localStorage.getItem('rahmoFavoriteList')) || [];
+        renderFavorites(favArray);
+    }
+
+    function renderFavorites(favs) {
+        favList.innerHTML = "";
+        if (favs.length === 0) {
+            favList.innerHTML = "<li>No favorites saved yet.</li>";
+            return;
+        }
+        favs.forEach(function(item) {
+            const li = document.createElement('li');
+            li.textContent = item.type + ": " + item.name + (item.notes ? " — " + item.notes : "");
+            favList.appendChild(li);
+        });
+    }
+</script>
+
+</body>
+</html>
